@@ -1,0 +1,9 @@
+[package]
+name = "rust_lessons"
+version = "0.1.0"
+authors = ["Steve Kirsch <stk@token.io>"]
+edition = "2018"
+
+[dependencies]
+rand="0.6"
+
