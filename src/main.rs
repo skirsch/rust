@@ -27,25 +27,34 @@ fn maptest() {
 
     // Type inference lets us omit an explicit type signature (which
     // would be `HashMap<String, String>` in this example).
+
+    let mut dict = HashMap::new();
+    println!("starting insert of 1M items ");
+    for n in 1..1_000_005 {
+        dict.insert(n, n + 1);
+    }
+    println!("ended insert of 1M items {}", dict[&3]); // this is slow because it keeps rehashing
+
+    println!("starting modify of 1M items ");
+    for n in 1..1_000_005 {
+        dict.insert(n, n - 1);
+    }
+    println!("ended modify of 1M items {}", dict[&3]); // this is slow because it keeps rehashing
+
+    println!("starting lookup of 1M items ");
+    let mut a: i64 = 1; // panic if i32
+    for n in 1..1_000_005 {
+        a += dict[&n]; // look up numbers.will panic if no entry found
+    }
+    println!("ended lookup of 1M items {} ", a);
+
     let mut book_reviews = HashMap::new();
 
     // Review some books.
-    book_reviews.insert(
-        "Adventures of Huckleberry Finn".to_string(),
-        "My favorite book.".to_string(),
-    );
-    book_reviews.insert(
-        "Grimms' Fairy Tales".to_string(),
-        "Masterpiece.".to_string(),
-    );
-    book_reviews.insert(
-        "Pride and Prejudice".to_string(),
-        "Very enjoyable.".to_string(),
-    );
-    book_reviews.insert(
-        "The Adventures of Sherlock Holmes".to_string(),
-        "Eye lyked it alot.".to_string(),
-    );
+    book_reviews.insert("Adventures of Huckleberry Finn", "My favorite book.");
+    book_reviews.insert("Grimms' Fairy Tales", "Masterpiece.");
+    book_reviews.insert("Pride and Prejudice", "Very enjoyable.");
+    book_reviews.insert("The Adventures of Sherlock Holmes", "Eye lyked it alot.");
 
     // Check for a specific one.
     // When collections store owned values (String), they can still be
