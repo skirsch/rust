@@ -5,39 +5,21 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "lldb",
+            "name": "(Windows) Launch",
+            "type": "cppvsdbg",
             "request": "launch",
-            "name": "Debug executable 'rust_lessons'",
-            "cargo": {
-                "args": [
-                    "build",
-                    "--bin=rust_lessons",
-                    "--package=rust_lessons"
-                ],
-                "filter": {
-                    "kind": "bin"
-                }
-            },
+            "program": "${workspaceFolder}/target/debug/rust_lessons.exe",
             "args": [],
-            "cwd": "${workspaceFolder}"
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false
         },
         {
-            "type": "lldb",
-            "request": "launch",
-            "name": "Debug unit tests in executable 'rust_lessons'",
-            "cargo": {
-                "args": [
-                    "test",
-                    "--no-run",
-                    "--bin=rust_lessons",
-                    "--package=rust_lessons"
-                ],
-                "filter": {
-                    "kind": "bin"
-                }
-            },
-            "args": [],
-            "cwd": "${workspaceFolder}"
+            "name": "(Windows) Attach",
+            "type": "cppvsdbg",
+            "request": "attach",
+            "processId": "${command:pickProcess}"
         }
     ]
 }

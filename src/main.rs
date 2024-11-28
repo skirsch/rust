@@ -1,16 +1,39 @@
 // use std::env;
-
+// use cargo run in terminal to run
 fn main() {
-    // `n` will take the values: 1, 2, ..., 100 in each iteration
-    // 100M in 5 seconds. Uses 1 core (4 cores on my machine); so 25% of "cpu" (since 4 cores on machine)
-    let mut a = 1;
-    println!("{}", a);
-    for _n in 1..10000005 {
-        a += 1;
-    }
-    println!("done {}", a);
+    let strt = get_time() as f64;
+    looptest();
+    let end = get_time() as f64;
+    println!("hi");
+    println!("{} elapsed", (end - strt) / 1000_f64);
     maptest();
     rndtest();
+}
+
+use std::time::{SystemTime, UNIX_EPOCH};
+
+fn get_time() -> u128 {
+    let start = SystemTime::now();
+    let since_the_epoch = start
+        .duration_since(UNIX_EPOCH)
+        .expect("Time went backwards");
+    let in_ms = since_the_epoch.as_millis();
+    // println!("{:?}", in_ms);
+    return in_ms;
+}
+
+fn looptest() {
+    // `n` will take the values: 1, 2, ..., 100 in each iteration
+    // 100M in 4 seconds. Uses 1 core (4 cores on my machine);
+    // so 25% of "cpu" (since 4 cores on machine).
+    // but this is unoptimized with debug info. About 10% faster
+    // if optimized.
+    let mut a = 1;
+    println!("starting...{}", a);
+    for _n in 1..100_000_005 {
+        a += 1;
+    }
+    println!("done with 100M loop {}", a);
 }
 
 use std::collections::HashMap;
